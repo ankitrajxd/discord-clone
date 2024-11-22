@@ -1,16 +1,35 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Poppins } from "next/font/google";
+import Nav from "./components/Nav";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const whitney = localFont({
+  src: [
+    {
+      path: "../public/whitney/whitneybook.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/whitney/whitneymedium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/whitney/whitneysemibold.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  display: "swap",
+  variable: "--font-whitney",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
@@ -26,9 +45,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`scrollbar-hide ${whitney.className} ${poppins.variable} antialiased `}
       >
-        {children}
+        <Nav>{children}</Nav>
       </body>
     </html>
   );
