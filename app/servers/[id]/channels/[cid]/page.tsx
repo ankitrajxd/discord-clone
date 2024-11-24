@@ -4,8 +4,7 @@ import * as Icons from "@/app/components/Icons";
 import Link from "next/link";
 import { data } from "@/app/data";
 import { useParams } from "next/navigation";
-import adam from "@/public/adam.jpg";
-import Image from "next/image";
+
 
 const Server1 = () => {
   const { id, cid } = useParams();
@@ -42,7 +41,7 @@ const Server1 = () => {
 
         {/* channel */}
         <div className="text-gray-300  flex-1 overflow-y-scroll mt-[12px] scrollbar-hide font-medium space-y-[21px]">
-          {data[serverID].categories.map((category, index) => (
+          {data[serverID].categories.map((category) => (
             <div key={category.id}>
               {category.label && (
                 <button
@@ -61,7 +60,7 @@ const Server1 = () => {
               <div className="space-y-0.5 mt-[5px]">
                 {category.channels
                   .filter((channel) => {
-                    let categoryOpen = !closedCategories.includes(category.id);
+                    const categoryOpen = !closedCategories.includes(category.id);
                     return categoryOpen || channel.unread;
                   })
                   .map((channel) => (
