@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: "#5865f2",
+        brand: "#5965F2",
         gray: {
           50: "#ECEDEE",
           100: "#DCDDDE",
@@ -17,11 +17,12 @@ export default {
           300: "#8E9297",
           400: "#72767D",
           500: "#5C6067",
-          550: "#4F545c",
+          550: "#4f545c",
           600: "#464950",
           700: "#36393F",
           800: "#2F3136",
           900: "#202225",
+          950: "#040405",
         },
       },
       fontFamily: {
@@ -31,5 +32,5 @@ export default {
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [require("tailwind-scrollbar-hide"), require("@tailwindcss/forms")],
 } satisfies Config;

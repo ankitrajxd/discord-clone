@@ -2,10 +2,22 @@
 import React, { useState } from "react";
 import * as Icons from "@/app/components/Icons";
 import Link from "next/link";
-import data from "@/app/data.json";
+import { data } from "@/app/data";
 import { useParams } from "next/navigation";
+import adam from "@/public/adam.jpg";
+import Image from "next/image";
 
 const Server1 = () => {
+  const { id, cid } = useParams();
+  const channelID = +cid!;
+  const serverID = +id!;
+  const server = data[serverID];
+  // finding the channel
+  const channel = server.categories
+    .map((c) => c.channels)
+    .flat()
+    .find((c) => c.id === +channelID!);
+
   const [closedCategories, setClosedCategories] = useState([]);
   function toggleCategory(categoryId) {
     setClosedCategories((prev) => {
@@ -24,13 +36,13 @@ const Server1 = () => {
             <Icons.Verified className="absolute size-4 text-gray-550" />{" "}
             <Icons.Check className="absolute size-4" />
           </div>
-          Tailwind CSS
+          {data[serverID].label}
           <Icons.Chevron className="size-[18px] ml-auto opacity-80" />
         </button>
 
         {/* channel */}
         <div className="text-gray-300  flex-1 overflow-y-scroll mt-[12px] scrollbar-hide font-medium space-y-[21px]">
-          {data[1].categories.map((category, index) => (
+          {data[serverID].categories.map((category, index) => (
             <div key={category.id}>
               {category.label && (
                 <button
@@ -63,19 +75,70 @@ const Server1 = () => {
         </div>
       </div>
 
-      <div className="bg-gray-700 flex-1 flex flex-col">
-        <div className="px-3 h-12 flex items-center shadow-md">general</div>
-        <div className=" p-3 flex-1 overflow-y-scroll scrollbar-hide space-y-4">
-          {[...Array(40)].map((a, index) => (
-            <p key={index}>
-              Message {index} Lorem, ipsum dolor sit amet consectetur
-              adipisicing elit. In velit, sunt hic beatae illum placeat quia at,
-              iusto, aut voluptatem ab sit quae iste repudiandae atque illo quos
-              nemo? Quod? Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Delectus nisi consequuntur laudantium maxime neque sit
-              molestias qui dolorem quibusdam hic. Quos labore quod magnam atque
-              veniam assumenda maxime reprehenderit iusto!
-            </p>
+      <div className="bg-gray-700 flex-1 flex-shrink min-w-0 flex flex-col">
+        <div className="px-2 h-12 flex items-center shadow-md">
+          <div className="flex items-center">
+            <Icons.Hashtag className="size-5 font-semibold text-gray-400 mx-2" />
+            <span className="text-white font-semibold mr-2 text-nowrap">
+              {channel?.label}
+            </span>
+          </div>
+
+          {channel?.description && (
+            <>
+              <div className="w-px h-6 bg-white/[.06] mx-2"></div>
+              <div className=" mx-2 text-sm truncate  font-medium text-gray-200">
+                {channel?.description}
+              </div>
+            </>
+          )}
+
+          <div className="flex items-center ml-auto">
+            <button className="text-gray-200 hover:text-gray-100">
+              <Icons.HashtagWithSpeechBubble className="size-6  mx-2" />
+            </button>
+            <button className="text-gray-200 hover:text-gray-100">
+              <Icons.Bell className="size-6  mx-2" />
+            </button>
+            <button className="text-gray-200 hover:text-gray-100">
+              <Icons.Pin className="size-6  mx-2" />
+            </button>
+            <button className="text-gray-200 hover:text-gray-100">
+              <Icons.People className="size-6  mx-2" />
+            </button>
+
+            <div className="mx-2 relative">
+              <input
+                type="text"
+                className="bg-gray-900 border-none h-6 w-36 rounded text-sm font-medium placeholder-gray-400 px-1.5"
+                placeholder="Search"
+              />
+
+              <div className="absolute right-0 inset-y-0 flex items-center">
+                <Icons.Spyglass className="size-4 mr-1.5 text-gray-400" />
+              </div>
+            </div>
+
+            <button className="text-gray-200 hover:text-gray-100">
+              <Icons.Inbox className="size-6  mx-2" />
+            </button>
+            <button className="text-gray-200 hover:text-gray-100">
+              <Icons.HashtagWithSpeechBubble className="size-6  mx-2" />
+            </button>
+            <button className="text-gray-200 hover:text-gray-100">
+              <Icons.QuestionCircle className="size-6  mx-2" />
+            </button>
+          </div>
+        </div>
+        <div className="  flex-1 overflow-y-scroll scrollbar-hide ">
+          {channel?.messages.map((message, i) => (
+            <div key={message.id}>
+              {i === 0 || message.user !== channel?.messages[i - 1].user ? (
+                <MessageWithUser message={message} />
+              ) : (
+                <Message message={message} />
+              )}
+            </div>
           ))}
         </div>
       </div>
@@ -87,7 +150,9 @@ export default Server1;
 
 function ChannelLink({ channel }) {
   const { id, cid } = useParams();
-  const Icon = channel.icon ? Icons[channel.icon] : Icons.Hashtag;
+  const Icon =
+    channel.icon && Icons[channel.icon] ? Icons[channel.icon] : Icons.Hashtag;
+
   const active = +cid! === +channel.id;
   const state = active
     ? "active"
@@ -115,5 +180,36 @@ function ChannelLink({ channel }) {
       {channel.label}
       <Icons.AddPerson className="size-4 ml-auto text-gray-200 opacity-0 group-hover:opacity-100 hover:text-gray-100" />
     </Link>
+  );
+}
+
+function MessageWithUser({ message }) {
+  return (
+    <div className="leading-[22px] mt-[17px] flex pl-4 pr-16 py-0.5 hover:bg-gray-950/[.07]">
+      <img
+        className="w-10 h-10 mr-4 rounded-full mt-0.5"
+        src={message.avatarUrl}
+        alt=""
+      />
+      <div>
+        <p className="flex items-baseline">
+          <span className="mr-2 font-medium text-green-400">
+            {message.user}
+          </span>
+          <span className="text-xs font-medium text-gray-400">
+            {message.date}
+          </span>
+        </p>
+        <p className="text-gray-100">{message.text}</p>
+      </div>
+    </div>
+  );
+}
+
+function Message({ message }) {
+  return (
+    <div className="pl-4 pr-16 py-0.5 hover:bg-gray-950/[.07] leading-[22px]">
+      <p className="text-gray-100 pl-14">{message.text}</p>
+    </div>
   );
 }

@@ -25,15 +25,15 @@ const Nav = ({ children }: NavProps) => {
 
         <hr className="border-t-white/[.06] border-t-2 rounded mx-2" />
 
-        <NavLink href="/servers/1" serverNo={1}>
+        <NavLink href="/servers/1/channels/1" serverNo={1}>
           <Image src={jonan} alt="Jonan" />
         </NavLink>
 
-        <NavLink href="/servers/2" serverNo={2}>
+        <NavLink href="/servers/2/channels/17" serverNo={2}>
           <Image src={minions} alt="Minions" />
         </NavLink>
 
-        <NavLink href="/servers/3" serverNo={3}>
+        <NavLink href="/servers/3/channels/28" serverNo={3}>
           <Image src={target} alt="Target" />
         </NavLink>
 
