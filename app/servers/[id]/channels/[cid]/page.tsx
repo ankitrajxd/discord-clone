@@ -5,7 +5,6 @@ import Link from "next/link";
 import { data } from "@/app/data";
 import { useParams } from "next/navigation";
 
-
 const Server1 = () => {
   const { id, cid } = useParams();
   const channelID = +cid!;
@@ -29,7 +28,7 @@ const Server1 = () => {
 
   return (
     <>
-      <div className="bg-gray-800 w-60 flex flex-col">
+      <div className="bg-gray-800 w-60 md:flex flex-col hidden">
         <button className="px-4 h-12 flex items-center shadow-md font-poppins font-semibold text-[15px] text-white hover:bg-gray-550/[0.16] transition">
           <div className="relative size-4 mr-1">
             <Icons.Verified className="absolute size-4 text-gray-550" />{" "}
@@ -60,7 +59,9 @@ const Server1 = () => {
               <div className="space-y-0.5 mt-[5px]">
                 {category.channels
                   .filter((channel) => {
-                    const categoryOpen = !closedCategories.includes(category.id);
+                    const categoryOpen = !closedCategories.includes(
+                      category.id
+                    );
                     return categoryOpen || channel.unread;
                   })
                   .map((channel) => (
@@ -85,28 +86,30 @@ const Server1 = () => {
 
           {channel?.description && (
             <>
-              <div className="w-px h-6 bg-white/[.06] mx-2"></div>
-              <div className=" mx-2 text-sm truncate  font-medium text-gray-200">
+              <div className=" hidden md:block w-px h-6 bg-white/[.06] mx-2"></div>
+              <div className="  hidden md:block mx-2 text-sm truncate  font-medium text-gray-200">
                 {channel?.description}
               </div>
             </>
           )}
 
+          
+
           <div className="flex items-center ml-auto">
             <button className="text-gray-200 hover:text-gray-100">
               <Icons.HashtagWithSpeechBubble className="size-6  mx-2" />
             </button>
-            <button className="text-gray-200 hover:text-gray-100">
+            <button className="text-gray-200 hover:text-gray-100 hidden md:block">
               <Icons.Bell className="size-6  mx-2" />
             </button>
-            <button className="text-gray-200 hover:text-gray-100">
+            <button className="text-gray-200 hover:text-gray-100 hidden md:block">
               <Icons.Pin className="size-6  mx-2" />
             </button>
             <button className="text-gray-200 hover:text-gray-100">
               <Icons.People className="size-6  mx-2" />
             </button>
 
-            <div className="mx-2 relative">
+            <div className="mx-2 relative hidden md:block">
               <input
                 type="text"
                 className="bg-gray-900 border-none h-6 w-36 rounded text-sm font-medium placeholder-gray-400 px-1.5"
@@ -118,13 +121,13 @@ const Server1 = () => {
               </div>
             </div>
 
-            <button className="text-gray-200 hover:text-gray-100">
+            <button className="text-gray-200 hover:text-gray-100 hidden md:block">
               <Icons.Inbox className="size-6  mx-2" />
-            </button>
-            <button className="text-gray-200 hover:text-gray-100">
+            </button> 
+            <button className="text-gray-200 hover:text-gray-100 hidden md:block">
               <Icons.HashtagWithSpeechBubble className="size-6  mx-2" />
             </button>
-            <button className="text-gray-200 hover:text-gray-100">
+            <button className="text-gray-200 hover:text-gray-100 hidden md:block">
               <Icons.QuestionCircle className="size-6  mx-2" />
             </button>
           </div>

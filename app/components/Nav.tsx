@@ -11,13 +11,14 @@ import warzone from "@/public/warzone.webp";
 import Image from "next/image";
 
 interface NavProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  className?: string;
 }
 
-const Nav = ({ children }: NavProps) => {
+const Nav = ({ children, className }: NavProps) => {
   return (
-    <div className="flex text-gray-100 h-screen">
-      <div className="bg-gray-900 p-3  overflow-y-scroll scrollbar-hide flex flex-col gap-y-2">
+    <div className={`flex text-gray-100 h-screen ${className}`}>
+      <div className="bg-gray-900 p-3  overflow-y-scroll scrollbar-hide  flex-col gap-y-2 hidden md:flex ">
         <NavLink href="/">
           <DiscordIcon className="size-7" />
         </NavLink>
