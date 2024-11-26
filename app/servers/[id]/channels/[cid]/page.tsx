@@ -4,6 +4,8 @@ import * as Icons from "@/app/components/Icons";
 import Link from "next/link";
 import { data } from "@/app/data";
 import { useParams } from "next/navigation";
+import Image from "next/image";
+import ankit from "@/public/ankit.webp";
 
 const Server1 = () => {
   const { id, cid } = useParams();
@@ -70,12 +72,32 @@ const Server1 = () => {
               </div>
             </div>
           ))}
+        </div>
 
-          {/* dynamic channel */}
+        {/* user profile */}
+        <div className="px-1 h-[53px] flex justify-between items-center shadow-md font-poppins font-semibold text-[15px] bg-gray-900/70 text-white  transition">
+          <div className="p-1 pr-4 flex items-center hover:bg-gray-700 rounded">
+            <div className=" size-8 rounded-full overflow-hidden mr-2">
+              <Image src={ankit} alt="ankit" />
+            </div>
+            <span className="font-sans">∆nkit 🍉</span>
+          </div>
+          <div className="flex items-center gap-2 mr-1">
+            <button className="text-gray-200 hover:text-gray-100 hidden md:block">
+              <Icons.QuestionCircle className="size-6  " />
+            </button>
+            <button className="text-gray-200 hover:text-gray-100 hidden md:block">
+              <Icons.People className="size-6 " />
+            </button>
+            <button className="text-gray-200 hover:text-gray-100 hidden md:block">
+              <Icons.Pin className="size-6 " />
+            </button>
+          </div>
         </div>
       </div>
 
       <div className="bg-gray-700 flex-1 flex-shrink min-w-0 flex flex-col">
+        {/* header */}
         <div className="px-2 h-12 flex items-center shadow-md">
           <div className="flex items-center">
             <Icons.Hashtag className="size-5 font-semibold text-gray-400 mx-2" />
@@ -92,8 +114,6 @@ const Server1 = () => {
               </div>
             </>
           )}
-
-          
 
           <div className="flex items-center ml-auto">
             <button className="text-gray-200 hover:text-gray-100">
@@ -123,7 +143,7 @@ const Server1 = () => {
 
             <button className="text-gray-200 hover:text-gray-100 hidden md:block">
               <Icons.Inbox className="size-6  mx-2" />
-            </button> 
+            </button>
             <button className="text-gray-200 hover:text-gray-100 hidden md:block">
               <Icons.HashtagWithSpeechBubble className="size-6  mx-2" />
             </button>
@@ -132,6 +152,7 @@ const Server1 = () => {
             </button>
           </div>
         </div>
+        {/* messages */}
         <div className="  flex-1 overflow-y-scroll scrollbar-hide ">
           {channel?.messages.map((message, i) => (
             <div key={message.id}>
@@ -142,6 +163,17 @@ const Server1 = () => {
               )}
             </div>
           ))}
+        </div>
+
+        {/* chatinput */}
+        <div className="h-14 bg-gray-700 rounded relative">
+          <div className="p-4 pt-0  mb-6 rounded absolute bottom-0 w-full -top-3 ">
+            <input
+              placeholder={`Message #${channel.label}`}
+              className="w-full rounded-lg bg-gray-800 border-none focus:ring-0 focus:outline-none py-[9px]"
+              type="text"
+            />
+          </div>
         </div>
       </div>
     </>
