@@ -30,7 +30,7 @@ const Server1 = () => {
 
   return (
     <>
-      <div className="bg-gray-800 w-60 md:flex flex-col hidden">
+      <div className="bg-[#2B2D31] w-60 md:flex flex-col hidden">
         <button className="px-4 h-12 flex items-center shadow-md font-poppins font-semibold text-[15px] text-white hover:bg-gray-550/[0.16] transition">
           <div className="relative size-4 mr-1">
             <Icons.Verified className="absolute size-4 text-gray-550" />{" "}
@@ -41,7 +41,7 @@ const Server1 = () => {
         </button>
 
         {/* channel */}
-        <div className="text-gray-300  flex-1 overflow-y-scroll mt-[12px] scrollbar-hide font-medium space-y-[21px]">
+        <div className="text-gray-300  flex-1 overflow-y-scroll mt-[12px] scrollbar-hide font-medium space-y-[21px] bg-[#2B2D31]">
           {data[serverID].categories.map((category) => (
             <div key={category.id}>
               {category.label && (
@@ -75,7 +75,7 @@ const Server1 = () => {
         </div>
 
         {/* user profile */}
-        <div className="px-1 h-[53px] flex justify-between items-center shadow-md font-poppins font-semibold text-[15px] bg-gray-900/70 text-white  transition">
+        <div className="px-1 h-[53px] flex justify-between items-center shadow-md font-poppins font-semibold text-[15px] bg-[#232428] text-white  transition">
           <div className="p-1 pr-4 flex items-center hover:bg-gray-700 rounded">
             <div className=" size-8 rounded-full overflow-hidden mr-2">
               <Image src={ankit} alt="ankit" />
@@ -96,7 +96,7 @@ const Server1 = () => {
         </div>
       </div>
 
-      <div className="bg-gray-700 flex-1 flex-shrink min-w-0 flex flex-col">
+      <div className="bg-[rgb(49,51,56)] flex-1 flex-shrink min-w-0 flex flex-col">
         {/* header */}
         <div className="px-2 h-12 flex items-center shadow-md">
           <div className="flex items-center">
@@ -166,11 +166,11 @@ const Server1 = () => {
         </div>
 
         {/* chatinput */}
-        <div className="h-14 bg-gray-700 rounded relative">
+        <div className="h-14 bg-[#313338] rounded relative">
           <div className="p-4 pt-0  mb-6 rounded absolute bottom-0 w-full -top-3 ">
             <input
               placeholder={`Message #${channel.label}`}
-              className="w-full rounded-lg bg-gray-800 border-none focus:ring-0 focus:outline-none py-[9px]"
+              className="w-full rounded-lg bg-[#383A40] border-none focus:ring-0 focus:outline-none py-[10px] px-4 placeholder-gray-400 text-gray-100"
               type="text"
             />
           </div>

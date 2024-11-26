@@ -9,6 +9,7 @@ import target from "@/public/target.webp";
 import programmerhub from "@/public/programmerhub.webp";
 import warzone from "@/public/warzone.webp";
 import Image from "next/image";
+import compass from "@/public/compass.png";
 
 interface NavProps {
   children?: React.ReactNode;
@@ -18,32 +19,37 @@ interface NavProps {
 const Nav = ({ children, className }: NavProps) => {
   return (
     <div className={`flex text-gray-100 h-screen ${className}`}>
-      <div className="bg-gray-900 p-3  overflow-y-scroll scrollbar-hide  flex-col gap-y-2 hidden md:flex ">
-        <NavLink href="/">
-          <DiscordIcon className="size-7" />
-        </NavLink>
-
-        <hr className="border-t-white/[.06] border-t-2 rounded mx-2" />
-
-        <NavLink href="/servers/1/channels/1" serverNo={1}>
-          <Image src={jonan} alt="Jonan" />
-        </NavLink>
-
-        <NavLink href="/servers/2/channels/17" serverNo={2}>
-          <Image src={minions} alt="Minions" />
-        </NavLink>
-
-        <NavLink href="/servers/3/channels/28" serverNo={3}>
-          <Image src={target} alt="Target" />
-        </NavLink>
-
-        <NavLink href="/servers/4" serverNo={4}>
-          <Image src={programmerhub} alt="Programmerhub" />
-        </NavLink>
-
-        <NavLink href="/servers/5" serverNo={5}>
-          <Image src={warzone} alt="Warzone" />
-        </NavLink>
+      <div className="bg-[#1E1F22] p-3   hidden md:flex flex-col ">
+        <div className=" gap-y-2 md:flex flex-col overflow-y-scroll scrollbar-hide flex-1">
+          <NavLink href="/">
+            <DiscordIcon className="size-7" />
+          </NavLink>
+          <hr className="border-t-white/[.06] border-t-2 rounded mx-2" />
+          <NavLink href="/servers/1/channels/1" serverNo={1}>
+            <Image src={jonan} alt="Jonan" />
+          </NavLink>
+          <NavLink href="/servers/2/channels/17" serverNo={2}>
+            <Image src={minions} alt="Minions" />
+          </NavLink>
+          <NavLink href="/servers/3/channels/28" serverNo={3}>
+            <Image src={target} alt="Target" />
+          </NavLink>
+          <NavLink href="/servers/4" serverNo={4}>
+            <Image src={programmerhub} alt="Programmerhub" />
+          </NavLink>
+          <NavLink href="/servers/5" serverNo={5}>
+            <Image src={warzone} alt="Warzone" />
+          </NavLink>
+        </div>
+        <div className="h-12 ">
+          <div className="bg-[#313338] size-12 rounded-full flex items-center justify-center">
+            <Image
+              src={compass}
+              alt="compass"
+              className="size-6 invert opacity-70 hover:opacity-100 transition"
+            />
+          </div>
+        </div>
       </div>
       {children}
     </div>
@@ -84,7 +90,7 @@ function NavLink({ children, href, serverNo }: NavLinkProps) {
             isHomeActive || isServerActive
               ? "rounded-2xl bg-brand text-white"
               : "group-hover:bg-brand group-hover:text-white transition-all duration-300 text-gray-100 bg-gray-700 rounded-3xl"
-          }  size-12   group-hover:rounded-2xl flex items-center justify-center transition-all  group-active:translate-y-px overflow-hidden`}
+          }  size-12 group-hover:rounded-2xl flex items-center justify-center transition-all  group-active:translate-y-px overflow-hidden`}
         >
           {children}
         </div>
